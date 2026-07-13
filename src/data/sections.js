@@ -1,0 +1,52 @@
+export const sections = [
+  {
+    id: 'home',
+    kind: 'hero',
+    eyebrow: 'Logística & Gestión de Operaciones',
+    title: 'Nayeli\nAldana',
+    subtitle: 'Masterclass en Logística y Gestión de Operaciones. Estrategias de alto impacto para cadenas de suministro resilientes.',
+    cta: 'Explorar Trayectoria',
+    link: '#strategy',
+  },
+  {
+    id: 'strategy',
+    kind: 'stats',
+    eyebrow: '01 — Estrategia',
+    title: 'Visión Estratégica',
+    subtitle: 'Diseño y optimización de procesos operativos mediante el análisis de datos masivos y toma de decisiones en tiempo real.',
+    metrics: [
+      { label: 'Reducción de Obsolescencia', value: '20%' },
+      { label: 'Mejora en Tiempo de Entrega', value: '15min' },
+    ],
+  },
+  {
+    id: 'operations',
+    kind: 'stats',
+    reverse: true,
+    eyebrow: '02 — Operaciones',
+    title: 'Experiencia Operativa',
+    subtitle: 'Más de 3 años liderando la transformación de centros de distribución y almacenes automatizados de gran escala.',
+    metrics: [
+      { label: 'Años de Experiencia', value: '3+' },
+      { label: 'Metodología Aplicada', value: '5S' },
+    ],
+  },
+  {
+    id: 'projects',
+    kind: 'cta',
+    eyebrow: '03 — Proyectos',
+    title: 'Proyectos de Impacto',
+    subtitle: 'De la digitalización de reportes manuales a tableros de control interactivos que impulsan la eficiencia global.',
+    cta: 'Ver Casos de Estudio',
+    link: '#contact',
+  },
+  {
+    id: 'contact',
+    kind: 'contact',
+    eyebrow: '04 — Contacto',
+    title: 'Optimicemos Juntos',
+    subtitle: 'Estoy disponible para consultorías estratégicas y colaboraciones en el sector logístico.',
+    cta: 'Iniciar Conversación',
+    link: 'mailto:hola@nayelialdana.com',
+  },
+]
