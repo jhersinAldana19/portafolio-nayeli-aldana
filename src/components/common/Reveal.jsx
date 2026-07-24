@@ -1,33 +1,42 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import { gsap, prefersReducedMotion } from '../../lib/gsap'
 
-export function Reveal({ as: Tag = 'div', className = '', delay = 0, children }) {
+export function Reveal({ as: Tag = 'div', className = '', delay = 0, children, y = 40 }) {
   const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current
     if (!el) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
-    )
+    if (prefersReducedMotion()) {
+      gsap.set(el, { clearProps: 'all' })
+      return
+    }
 
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { autoAlpha: 0, y },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1,
+          delay: delay / 1000,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      )
+    }, el)
+
+    return () => ctx.revert()
+  }, [delay, y])
 
   return (
-    <Tag
-      ref={ref}
-      className={`reveal ${visible ? 'reveal--visible' : ''} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
+    <Tag ref={ref} className={className}>
       {children}
     </Tag>
   )
