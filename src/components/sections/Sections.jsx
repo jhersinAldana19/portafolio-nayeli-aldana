@@ -7,14 +7,23 @@ import { CertificateShowcase } from '../common/CertificateShowcase'
 import { EducationLogos } from '../common/EducationLogos'
 import { ExperienceShowcase } from '../common/ExperienceShowcase'
 import { Eyebrow } from '../common/Eyebrow'
-import { FillButton } from '../common/FillButton'
+import { FillButton, DownloadIcon } from '../common/FillButton'
+import { SupplyVideo } from '../common/SupplyVideo'
+import { BackusGpsStage } from '../common/BackusGpsStage'
+import { ContactLinks } from '../common/ContactLinks'
 import heroPhoto from '../../assets/hero-nayeli.jpg'
 import logoSenati from '../../assets/logo-senati.png'
 import logoUpc from '../../assets/logo-upc.png'
+import seguimientoGps from '../../assets/seguimiento-tiempo-real.webp'
+import cvPdf from '../../assets/cv-nayeli-aldana.pdf'
 
 const logos = {
   SENATI: logoSenati,
   UPC: logoUpc,
+}
+
+const mediaAssets = {
+  'seguimiento-tiempo-real': seguimientoGps,
 }
 
 function Hero({ section }) {
@@ -106,7 +115,12 @@ function Hero({ section }) {
           </h1>
           <p className="subtitle hero-anim-subtitle">{section.subtitle}</p>
           <div className="hero-anim-cta">
-            <FillButton href={section.link} variant="on-dark">
+            <FillButton
+              href={cvPdf}
+              download="CV-Nayeli-Aldana-Vento.pdf"
+              variant="on-dark"
+              icon={<DownloadIcon />}
+            >
               {section.cta}
             </FillButton>
           </div>
@@ -163,9 +177,14 @@ function Credentials() {
 }
 
 function Stats({ section }) {
+  const mediaSrc = section.media ? mediaAssets[section.media.src] : null
+
   return (
-    <section id={section.id} className={`section section--stats ${section.reverse ? 'section--reverse' : ''}`}>
-      <div className="stats-grid">
+    <section
+      id={section.id}
+      className={`section section--stats ${section.reverse ? 'section--reverse' : ''} ${mediaSrc ? 'section--stats-media' : ''}`}
+    >
+      <div className={`stats-grid ${mediaSrc ? 'stats-grid--media' : ''}`}>
         <div className="stats-grid__text">
           <Reveal>
             <Eyebrow>{section.eyebrow}</Eyebrow>
@@ -175,14 +194,21 @@ function Stats({ section }) {
             <p className="subtitle">{section.subtitle}</p>
           </Reveal>
         </div>
-        <div className="stats-grid__metrics">
-          {section.metrics.map((m, idx) => (
-            <Reveal key={m.label} as="div" className="stat" delay={idx * 120}>
-              <h3>{m.value}</h3>
-              <p>{m.label}</p>
-            </Reveal>
-          ))}
-        </div>
+
+        {mediaSrc ? (
+          <div className="stats-grid__media">
+            <BackusGpsStage media={section.media} imageSrc={mediaSrc} />
+          </div>
+        ) : (
+          <div className="stats-grid__metrics">
+            {section.metrics.map((m, idx) => (
+              <Reveal key={m.label} as="div" className="stat" delay={idx * 120}>
+                <h3>{m.value}</h3>
+                <p>{m.label}</p>
+              </Reveal>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
@@ -219,11 +245,7 @@ function Contact({ section }) {
         <AnimatedHeading className="heading-section">{section.title}</AnimatedHeading>
         <Reveal delay={80}>
           <p className="subtitle mx-auto">{section.subtitle}</p>
-          <div className="mt-cta">
-            <FillButton href={section.link} variant="on-dark">
-              {section.cta}
-            </FillButton>
-          </div>
+          <ContactLinks channels={section.channels} cvHref={cvPdf} />
         </Reveal>
       </div>
       <p className="footnote">Nayeli Aldana — {new Date().getFullYear()}</p>
@@ -233,6 +255,7 @@ function Contact({ section }) {
 
 const renderers = {
   hero: Hero,
+  video: SupplyVideo,
   about: About,
   credentials: Credentials,
   experience: ExperienceShowcase,

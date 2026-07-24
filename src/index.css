@@ -376,6 +376,20 @@ h1, h2, h3, h4, .font-heading {
 .btn-fill__label {
   position: relative;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btn-fill__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.btn-fill__icon svg {
+  display: block;
 }
 
 .btn-fill--solid {
@@ -438,6 +452,81 @@ h1, h2, h3, h4, .font-heading {
   justify-content: center;
 }
 
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.75rem 2.5rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+}
+
+.contact-links__item {
+  margin: 0;
+}
+
+.contact-links__anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 7.5rem;
+  text-decoration: none;
+  color: var(--color-on-primary);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-links__anchor:hover,
+.contact-links__anchor:focus-visible {
+  color: var(--color-secondary);
+  transform: translateY(-3px);
+}
+
+.contact-links__icon {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: inherit;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-links__anchor:hover .contact-links__icon,
+.contact-links__anchor:focus-visible .contact-links__icon {
+  border-color: var(--color-secondary);
+  background: rgba(224, 122, 69, 0.12);
+}
+
+.contact-links__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.contact-links__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact-links__detail {
+  font-size: 0.82rem;
+  color: var(--color-on-primary-muted);
+  word-break: break-word;
+  text-align: center;
+  max-width: 11rem;
+}
+
+.contact-links__anchor:hover .contact-links__detail,
+.contact-links__anchor:focus-visible .contact-links__detail {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .hero-anim-cta {
   display: inline-block;
   opacity: 1;
@@ -446,6 +535,55 @@ h1, h2, h3, h4, .font-heading {
 
 .hero-anim-cta .btn-fill {
   margin-top: 2.5rem;
+}
+
+/* Supply Chain video */
+.section--video {
+  background: var(--color-bg-muted);
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 4rem 4rem;
+}
+
+.section--video .video-block {
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--color-bg-muted);
+  border: none;
+  outline: none;
+  box-shadow: none;
+  aspect-ratio: 16 / 9;
+}
+
+.video-frame__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .section--video {
+    padding: 3rem 1.25rem;
+  }
+
+  .section--video .video-block,
+  .video-frame {
+    max-width: 100%;
+  }
 }
 
 /* About */
@@ -796,6 +934,31 @@ h1, h2, h3, h4, .font-heading {
   max-width: 720px;
 }
 
+.experience__doc-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.experience__doc-link:hover,
+.experience__doc-link:focus-visible {
+  opacity: 1;
+  color: var(--color-secondary);
+}
+
 .experience__radar-label {
   margin: 0 0 1rem;
   font-size: 0.72rem;
@@ -871,6 +1034,117 @@ h1, h2, h3, h4, .font-heading {
 .stats-grid__metrics {
   display: flex;
   flex-direction: column;
+}
+
+.stats-grid__media {
+  width: 100%;
+}
+
+.stats-grid--media {
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: stretch;
+}
+
+.section--stats-media {
+  background: var(--color-bg-muted);
+  color: var(--color-ink);
+  border-top: 1px solid var(--color-line);
+}
+
+.section--stats-media .heading-section {
+  color: var(--color-ink);
+}
+
+.section--stats-media .subtitle {
+  color: var(--color-muted);
+}
+
+.section--stats-media .eyebrow {
+  color: var(--color-primary);
+}
+
+.gps-stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gps-stage__panel {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+}
+
+.gps-stage__img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  border: none;
+}
+
+.gps-stage__top {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  right: 0.9rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.gps-stage__brand {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+  padding: 0.35rem 0.55rem;
+  background: #fff;
+}
+
+.gps-stage__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.65rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-ink);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.gps-stage__pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #e23b3b;
+}
+
+.gps-stage__caption {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+  max-width: 36rem;
+}
+
+.gps-stage__kicker {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
 }
 
 .stat {
@@ -1025,9 +1299,14 @@ h1, h2, h3, h4, .font-heading {
 @media (max-width: 900px) {
   .stats-grid,
   .section--reverse .stats-grid,
+  .stats-grid--media,
   .about-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .gps-stage__brand {
+    height: 24px;
   }
 
   .experience__signals {

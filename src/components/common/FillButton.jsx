@@ -10,6 +10,7 @@ export function FillButton({
   variant = 'solid',
   type = 'button',
   download,
+  icon,
   ...rest
 }) {
   const rootRef = useRef(null)
@@ -48,6 +49,13 @@ export function FillButton({
     tweenRef.current?.reverse()
   }
 
+  const label = (
+    <span className="btn-fill__label">
+      {icon ? <span className="btn-fill__icon" aria-hidden="true">{icon}</span> : null}
+      <span>{children}</span>
+    </span>
+  )
+
   const sharedProps = {
     ref: rootRef,
     className: `btn-fill btn-fill--${variant} ${className}`.trim(),
@@ -62,7 +70,7 @@ export function FillButton({
     return (
       <button type={type} onClick={onClick} {...sharedProps}>
         <span ref={fillRef} className="btn-fill__ink" aria-hidden="true" />
-        <span className="btn-fill__label">{children}</span>
+        {label}
       </button>
     )
   }
@@ -70,7 +78,27 @@ export function FillButton({
   return (
     <a href={href} download={download} onClick={onClick} {...sharedProps}>
       <span ref={fillRef} className="btn-fill__ink" aria-hidden="true" />
-      <span className="btn-fill__label">{children}</span>
+      {label}
     </a>
+  )
+}
+
+export function DownloadIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 19h16"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
   )
 }

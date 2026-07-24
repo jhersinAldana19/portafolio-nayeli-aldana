@@ -5,8 +5,8 @@ export const sections = [
     eyebrow: 'Monitoreo y Ruteo',
     title: 'Nayeli\nAldana',
     subtitle: '3 años en Supply Chain, operaciones logísticas y consumo masivo.',
-    cta: 'Conóceme',
-    link: '#about',
+    cta: 'Descargar CV',
+    download: true,
   },
   {
     id: 'about',
@@ -27,6 +27,10 @@ export const sections = [
         status: 'Estudiante actual',
       },
     ],
+  },
+  {
+    id: 'supply',
+    kind: 'video',
   },
   {
     id: 'credentials',
@@ -61,11 +65,14 @@ export const sections = [
     eyebrow: '03 — Monitoreo',
     title: 'Seguimiento en Tiempo Real',
     subtitle:
-      'Monitoreo del avance de rutas, coordinación con transportistas (OPLs) y resolución de incidencias para evitar retrasos. Control del cumplimiento de horarios de salida y llegada frente a la planificación diaria.',
-    metrics: [
-      { label: 'Visibilidad de Rutas', value: 'En vivo' },
-      { label: 'Gestión de Incidencias', value: 'Activa' },
-    ],
+      'En Backus monitoreé flota T1 con visibilidad GPS para coordinar rutas, anticipar desvíos y mantener el servicio entre Planta Ate y la red nacional de CDS.',
+    media: {
+      src: 'seguimiento-tiempo-real',
+      alt: 'Pantalla de monitoreo GPS en operaciones Backus',
+      kicker: 'Backus',
+      caption:
+        'Sistema de GPS para ver en qué estado se encuentra la unidad y seguir su avance en tiempo real.',
+    },
   },
   {
     id: 'operations',
@@ -97,7 +104,32 @@ export const sections = [
     title: 'Lista para Aportar',
     subtitle:
       'Disponible para roles de control de transporte, monitoreo de rutas y coordinación operativa en entornos de alta exigencia.',
-    cta: 'Iniciar Conversación',
-    link: 'mailto:hola@nayelialdana.com',
+    channels: [
+      {
+        label: 'Correo',
+        href: 'mailto:311nalleli112@gmail.com',
+        detail: '311nalleli112@gmail.com',
+        icon: 'mail',
+      },
+      {
+        label: 'WhatsApp',
+        href: 'https://wa.me/51928414225',
+        detail: '+51 928 414 225',
+        icon: 'phone',
+      },
+      {
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/nayeli-aldana-vento-117165265/',
+        detail: 'nayeli-aldana-vento',
+        icon: 'linkedin',
+      },
+      {
+        label: 'CV',
+        href: 'cv',
+        detail: 'Descargar PDF',
+        download: 'CV-Nayeli-Aldana-Vento.pdf',
+        icon: 'download',
+      },
+    ],
   },
 ]

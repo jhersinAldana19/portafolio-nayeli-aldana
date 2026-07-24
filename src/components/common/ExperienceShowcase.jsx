@@ -1,12 +1,14 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, prefersReducedMotion } from '../../lib/gsap'
 import { Reveal } from './Reveal'
 import { AnimatedHeading } from './AnimatedHeading'
 import { Eyebrow } from './Eyebrow'
 import logoBackus from '../../assets/logo-backus.png'
+import constanciaTrabajo from '../../assets/constancia-trabajo.webp'
 
 export function ExperienceShowcase({ section }) {
   const rootRef = useRef(null)
+  const [openDoc, setOpenDoc] = useState(false)
 
   useLayoutEffect(() => {
     const root = rootRef.current
@@ -55,55 +57,108 @@ export function ExperienceShowcase({ section }) {
     return () => ctx.revert()
   }, [])
 
+  useEffect(() => {
+    if (!openDoc) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpenDoc(false)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [openDoc])
+
   return (
-    <section id={section.id} ref={rootRef} className="section section--experience">
-      <div className="experience">
-        <div className="experience__brand">
-          <img
-            src={logoBackus}
-            alt={`Logo ${section.company}`}
-            className="experience__logo"
-            loading="lazy"
-          />
-        </div>
+    <>
+      <section id={section.id} ref={rootRef} className="section section--experience">
+        <div className="experience">
+          <div className="experience__brand">
+            <img
+              src={logoBackus}
+              alt={`Logo ${section.company}`}
+              className="experience__logo"
+              loading="lazy"
+            />
+          </div>
 
-        <div className="experience__copy">
-          <Reveal>
-            <Eyebrow>{section.eyebrow}</Eyebrow>
-          </Reveal>
-          <AnimatedHeading className="heading-section">{section.title}</AnimatedHeading>
+          <div className="experience__copy">
+            <Reveal>
+              <Eyebrow>{section.eyebrow}</Eyebrow>
+            </Reveal>
+            <AnimatedHeading className="heading-section">{section.title}</AnimatedHeading>
 
-          <Reveal delay={60}>
-            <p className="experience__company">
-              {section.company}
-              <span aria-hidden="true"> · </span>
-              {section.employment}
-            </p>
-            <div className="experience__timeline" aria-label="Periodo laboral">
-              <span>{section.period}</span>
-              <span className="experience__line" aria-hidden="true" />
-              <span>
-                {section.duration}
+            <Reveal delay={60}>
+              <p className="experience__company">
+                {section.company}
                 <span aria-hidden="true"> · </span>
-                {section.location}
-              </span>
-            </div>
-            <p className="subtitle experience__summary">{section.summary}</p>
-          </Reveal>
-        </div>
+                {section.employment}
+              </p>
+              <div className="experience__timeline" aria-label="Periodo laboral">
+                <span>{section.period}</span>
+                <span className="experience__line" aria-hidden="true" />
+                <span>
+                  {section.duration}
+                  <span aria-hidden="true"> · </span>
+                  {section.location}
+                </span>
+              </div>
+              <p className="subtitle experience__summary">{section.summary}</p>
+              <button
+                type="button"
+                className="experience__doc-link"
+                onClick={() => setOpenDoc(true)}
+              >
+                Ver constancia de trabajo
+              </button>
+            </Reveal>
+          </div>
 
-        <div className="experience__radar" aria-label="Capacidades operativas">
-          <p className="experience__radar-label">Radar operativo</p>
-          <ul className="experience__signals">
-            {section.signals.map((signal) => (
-              <li key={signal.label} className="experience__signal">
-                <strong>{signal.label}</strong>
-                <span>{signal.detail}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="experience__radar" aria-label="Capacidades operativas">
+            <p className="experience__radar-label">Radar operativo</p>
+            <ul className="experience__signals">
+              {section.signals.map((signal) => (
+                <li key={signal.label} className="experience__signal">
+                  <strong>{signal.label}</strong>
+                  <span>{signal.detail}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {openDoc && (
+        <div
+          className="certificate-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Constancia de trabajo"
+          onClick={() => setOpenDoc(false)}
+        >
+          <div className="certificate-lightbox__panel" onClick={(e) => e.stopPropagation()}>
+            <div className="certificate-lightbox__bar">
+              <p>Constancia de trabajo · Backus</p>
+              <div className="certificate-lightbox__tools">
+                <button
+                  type="button"
+                  className="certificate-lightbox__close"
+                  onClick={() => setOpenDoc(false)}
+                  aria-label="Cerrar"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+            <img
+              src={constanciaTrabajo}
+              alt="Constancia de trabajo de Nayeli Aldana en Backus"
+              className="certificate-lightbox__img"
+            />
+          </div>
+        </div>
+      )}
+    </>
   )
 }
